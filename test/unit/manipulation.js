@@ -1182,6 +1182,14 @@ test("clone(multiple selected options) (Bug #8129)", function() {
 
 });
 
+test("clone() on object element (Bug #10324)", function() {
+	expect(1);
+	var div = jQuery("<object height='355' width='425' type='application/x-shockwave-flash' data='http://www.youtube.com/v/t-7mQhSZRgM'>  <param name='movie' value='http://www.youtube.com/v/t-7mQhSZRgM'>  <param name='wmode' value='transparent'> </object>");
+	var clone = div.clone();
+
+	equal( clone.html(), div.html(), "Cloned <object>'s innerHTML equals source innerHTML" );
+});
+
 if (!isLocal) {
 test("clone() on XML nodes", function() {
 	expect(2);

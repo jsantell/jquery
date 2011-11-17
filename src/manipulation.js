@@ -427,6 +427,12 @@ function cloneFixAttributes( src, dest ) {
 	if ( nodeName === "object" ) {
 		dest.outerHTML = src.outerHTML;
 
+		// IE9 fails to clone children inside object elements
+		// with outerHTML, fixes #10324
+		if ( dest.outerHTML !== src.outerHTML ) {
+			dest.innerHTML = src.innerHTML;
+		}
+
 	} else if ( nodeName === "input" && (src.type === "checkbox" || src.type === "radio") ) {
 		// IE6-8 fails to persist the checked state of a cloned checkbox
 		// or radio button. Worse, IE6-7 fail to give the cloned element
